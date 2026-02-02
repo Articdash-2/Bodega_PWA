@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <base href="/" />
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Bodega PWA - Articdash-2" />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="bodega_pwa" />
+    <link rel="apple-touch-icon" href="icons/Icon-192.png" />
+
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <title>Bodega PWA</title>
+    <link rel="manifest" href="manifest.json" />
+
+    <style>
+      /* Fondo principal que cubre todo */
+      #loading-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #bf360c; /* Tu color naranja */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999; /* BLINDAJE: Siempre encima de Flutter */
+        transition: opacity 0.5s ease-out;
+      }
+
+      /* El círculo de carga con estilo neón */
+      .loader {
+        width: 60px;
+        height: 60px;
+        border: 6px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+      }
+
+      .loading-text {
+        margin-top: 25px;
+        color: white;
+        font-family: "Segoe UI", sans-serif;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-size: 14px;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading-indicator">
+      <div class="loader"></div>
+      <div class="loading-text">Sincronizando Bodega...</div>
+    </div>
+
+    <script src="flutter_bootstrap.js" async></script>
+
+    <script>
+      // Detectamos cuando la app está lista para interactuar
+      window.addEventListener("load", function () {
+        var loader = document.getElementById("loading-indicator");
+        if (loader) {
+          // Efecto de desvanecimiento
+          loader.style.opacity = "0";
+          setTimeout(function () {
+            loader.style.display = "none";
+          }, 500); // 500ms de pura elegancia
+        }
+      });
+    </script>
+  </body>
+</html>
